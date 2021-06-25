@@ -3,6 +3,7 @@ import { Grid } from 'semantic-ui-react';
 import EventForm from '../eventForm/EventForm';
 import EventList from './EventList';
 import { sampleData } from '../../../app/api/SampleData';
+import { useSelector } from 'react-redux';
 
 const EventDashboard = ({
   formOpen,
@@ -10,23 +11,23 @@ const EventDashboard = ({
   selectEvent,
   selectedEvent,
 }) => {
-  const [events, setEvents] = useState(sampleData);
+  const { events } = useSelector((state) => state.event);
 
-  function handleCreateEvent(event) {
-    setEvents([...events, event]);
-  }
+  // function handleCreateEvent(event) {
+  //   setEvents([...events, event]);
+  // }
 
-  function handleUpdateEvent(updatedEvent) {
-    setEvents(
-      events.map((evt) => (evt.id === updatedEvent.id ? updatedEvent : evt))
-    );
-    selectEvent(null);
-    setFormOpen(false);
-  }
+  // function handleUpdateEvent(updatedEvent) {
+  //   setEvents(
+  //     events.map((evt) => (evt.id === updatedEvent.id ? updatedEvent : evt))
+  //   );
+  //   selectEvent(null);
+  //   setFormOpen(false);
+  // }
 
-  function handleDeleteEvent(eventId) {
-    setEvents(events.filter((evt) => evt.id != eventId));
-  }
+  // function handleDeleteEvent(eventId) {
+  //   setEvents(events.filter((evt) => evt.id != eventId));
+  // }
 
   return (
     <>
@@ -35,10 +36,10 @@ const EventDashboard = ({
           <EventList
             events={events}
             selectEvent={selectEvent}
-            deleteEvent={handleDeleteEvent}
+            // deleteEvent={handleDeleteEvent}
           />
         </Grid.Column>
-        <Grid.Column width={6}>
+        {/* <Grid.Column width={6}>
           {formOpen && (
             <EventForm
               setFormOpen={setFormOpen}
@@ -49,7 +50,7 @@ const EventDashboard = ({
               key={selectedEvent ? selectedEvent.id : null}
             />
           )}
-        </Grid.Column>
+        </Grid.Column> */}
       </Grid>
     </>
   );
