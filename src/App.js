@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from 'react';
+import { Route } from 'react-router';
+import { Container } from 'semantic-ui-react';
+import EventDashboard from './components/events/eventDashboard/EventDashboard';
+import Navbar from './components/nav/Navbar/Navbar';
+import Home from './components/Home/Home';
+import EventDetailPage from './components/events/eventDetailsPage/EventDetailPage';
+import EventForm from './components/events/eventForm/EventForm';
+import Sandbox from './components/sandbox/Sandbox';
 function App() {
+  const [formOpen, setFormOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  function handleSelectEvent(event) {
+    setSelectedEvent(event);
+    setFormOpen(true);
+    console.log(selectedEvent);
+  }
+
+  function handleCreateFormOpen() {
+    setSelectedEvent(null);
+    setFormOpen(true);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar setFormOpen={handleCreateFormOpen} />
+      <Container style={{ marginTop: '7em' }}>
+        {/* <EventDashboard
+          formOpen={formOpen}
+          setFormOpen={setFormOpen}
+          selectEvent={handleSelectEvent}
+          selectedEvent={selectedEvent}
+        /> */}
+        <Route exact path="/" component={Home} />
+        <Route exact path="/events" component={EventDashboard} />
+        <Route exact path="/sandbox" component={Sandbox} />
+        <Route exact path="/events/:id" component={EventDetailPage} />
+        <Route path="/createEvent" component={EventForm} />
+      </Container>
+    </>
   );
 }
 
