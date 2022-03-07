@@ -26,12 +26,6 @@ function App() {
     <>
       <Navbar setFormOpen={handleCreateFormOpen} />
       <Container style={{ marginTop: '7em' }}>
-        {/* <EventDashboard
-          formOpen={formOpen}
-          setFormOpen={setFormOpen}
-          selectEvent={handleSelectEvent}
-          selectedEvent={selectedEvent}
-        /> */}
         <Route exact path="/" component={Home} />
         <Route exact path="/events" component={EventDashboard} />
         <Route exact path="/sandbox" component={Sandbox} />
